@@ -13,10 +13,10 @@ public class MainCrawling {
 	
 	public static void main(String[] args) {
 
-		//CinemaCrawling theater = new CinemaCrawling(WEB_DRIVER_ID, WEB_DRIVER_PATH, MEGABOX_THEATER);
-		//theater.insert_db();
-		MovieCrawling movie = new MovieCrawling(WEB_DRIVER_ID, WEB_DRIVER_PATH, MEGABOX_MOVIE);
-		movie.insert_db();
+		CinemaCrawling theater = new CinemaCrawling(WEB_DRIVER_ID, WEB_DRIVER_PATH, MEGABOX_THEATER);
+		theater.insert_db();
+		//MovieCrawling movie = new MovieCrawling(WEB_DRIVER_ID, WEB_DRIVER_PATH, MEGABOX_MOVIE);
+		//movie.insert_db();
 		System.out.println("끝");
 	}
 }
