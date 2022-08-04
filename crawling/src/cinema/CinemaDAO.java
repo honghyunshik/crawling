@@ -1,4 +1,4 @@
-package crawling;
+package cinema;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,17 +6,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TheaterDAO {
-	private static TheaterDAO theaterDao = null;
+public class CinemaDAO {
+	private static CinemaDAO theaterDao = null;
 
 	private static Connection con;
 	private PreparedStatement ps;
 	private ResultSet rs;
 	private int seq_val = 0;
 
-	public static TheaterDAO getInstance() {
+	public static CinemaDAO getInstance() {
 		if (theaterDao == null) {
-			theaterDao = new TheaterDAO();
+			theaterDao = new CinemaDAO();
 		}
 			
 		con = getConnection();
@@ -37,7 +37,7 @@ public class TheaterDAO {
 		return con;
 	}
 
-	public void insertTheater(TheaterDTO theater) {
+	public void insertTheater(CinemaDTO theater) {
 		String sql = "insert into" + " cinema(c_num,c_name,c_state,c_city,c_detail)"
 				+ " values(cinema_seq.nextval,?,?,?,?)";
 		try {
@@ -59,7 +59,7 @@ public class TheaterDAO {
 		}
 	}
 
-	public void insertFacility(TheaterDTO theater) {
+	public void insertFacility(CinemaDTO theater) {
 
 		String sql = "insert into" + " Facility(f_num,f_facility,c_num)"
 				+ " values(facility_seq.nextval,?,?)";
@@ -86,7 +86,7 @@ public class TheaterDAO {
 
 	}
 	
-	public void insertFloor(TheaterDTO theater) {
+	public void insertFloor(CinemaDTO theater) {
 		String sql = "insert into" + " Floor(f_num,f_floor,c_num)" + " values(floor_seq.nextval,?,?)";
 		con = getConnection();
 		int seq_num = select_Dual();
@@ -106,26 +106,6 @@ public class TheaterDAO {
 			try {
 				if (ps != null)
 					ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	public void minus_sequence() {
-		String sql = "select cinema_seq.nextval from dual";
-		
-		try {
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				seq_val=rs.getInt(1)-1;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
-				if(rs != null) rs.close();
-				if(ps != null) ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

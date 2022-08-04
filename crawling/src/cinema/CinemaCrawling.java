@@ -1,4 +1,4 @@
-package crawling;
+package cinema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class TheaterCrawling {
+public class CinemaCrawling {
 
 	private WebDriver driver;
 	private String WEB_DRIVER_ID;
@@ -17,16 +17,16 @@ public class TheaterCrawling {
 	private String MEGABOX_THEATER;
 	private String MEGABOX_THEATER_EACH;
 	private ArrayList<String> theater_num;
-	private ArrayList<TheaterDTO> theater_list;
+	private ArrayList<CinemaDTO> theater_list;
 
-	public TheaterCrawling(String WEB_DRIVER_ID, String WEB_DRIVER_PATH, String MEGABOX_THEATER) {
+	public CinemaCrawling(String WEB_DRIVER_ID, String WEB_DRIVER_PATH, String MEGABOX_THEATER) {
 
 		this.WEB_DRIVER_ID = WEB_DRIVER_ID;
 		this.WEB_DRIVER_PATH = WEB_DRIVER_PATH;
 		this.MEGABOX_THEATER = MEGABOX_THEATER;
 		this.MEGABOX_THEATER_EACH = "https://www.megabox.co.kr/theater?brchNo=";
 		theater_num = new ArrayList<String>();
-		theater_list = new ArrayList<TheaterDTO>();
+		theater_list = new ArrayList<CinemaDTO>();
 
 		try {
 			System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
@@ -84,7 +84,7 @@ public class TheaterCrawling {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
-			TheaterDTO tdto = new TheaterDTO();
+			CinemaDTO tdto = new CinemaDTO();
 
 			WebElement name_element = driver.findElement(By.className("theater-all")).findElement(By.tagName("p"));
 			tdto.setTheater_name(name_element.getText()); // name
@@ -139,7 +139,7 @@ public class TheaterCrawling {
 	}
 
 	public void print_list() {
-		for (TheaterDTO tdto : theater_list) {
+		for (CinemaDTO tdto : theater_list) {
 			System.out.println("name : " + tdto.getTheater_name());
 			System.out.println("main : " + tdto.getMain());
 			System.out.println("facility : " + tdto.getFacility());
@@ -155,8 +155,8 @@ public class TheaterCrawling {
 		make_all_theater_list();
 	}
 	
-	 public void for_sql(TheaterDTO tdto) { 
-		 TheaterDAO tdao =TheaterDAO.getInstance(); 
+	 public void for_sql(CinemaDTO tdto) { 
+		 CinemaDAO tdao =CinemaDAO.getInstance(); 
 		 tdao.insertTheater(tdto);
 		 tdao.insertFloor(tdto);
 		 tdao.insertFacility(tdto); }

@@ -1,6 +1,6 @@
-package crawling;
+package cinema;
 
-public class TheaterDTO {
+public class CinemaDTO {
 	private String theater_name;
 	private String main;
 	private String facility;
